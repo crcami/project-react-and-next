@@ -21,7 +21,7 @@ class App extends Component {
     const photosJson = await photos.json();
 
     const postsAndPhotos = postsJson.map((post, index) => {
-return {...post, cover: photosJson[index].url}
+      return { ...post, cover: photosJson[index].url }
     });
 
     this.setState({ posts: postsAndPhotos })
@@ -34,8 +34,9 @@ return {...post, cover: photosJson[index].url}
       <section className="container">
         <div className="posts">
           {posts.map(post => (
-            <div className="post">
-              <div key={post.id} className="post-content">
+            <div className="post" key={post.id}>
+              <img src={post.cover} alt={post.title} />
+              <div className="post-content">
                 <h1>{post.title}</h1>
                 <p>{post.body}</p>
               </div>
