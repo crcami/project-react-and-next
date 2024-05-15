@@ -1,4 +1,19 @@
+.container {
+  min-height: 100vh;
+  background: #FEFBF6;
+}
 .posts {
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.post {
+  background: #FEFAF6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.post-content {
+  padding: 30px;
 }
