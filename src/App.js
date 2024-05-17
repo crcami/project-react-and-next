@@ -2,8 +2,8 @@ import { Component } from 'react';
 
 import './App.css';
 
-import { PostCard } from './components/PostCard';
 import { loadPosts } from './utils/load-posts'
+import { Posts } from './components/Posts';
 
 
 class App extends Component {
@@ -11,12 +11,12 @@ class App extends Component {
     posts: []
   };
 
-  componentDidMount() {
-    this.loadPosts();
+  async componentDidMount() {
+    await this.loadPosts();
   }
 
   loadPosts = async () => {
-    const postsAndPhotos = await loadPosts ();
+    const postsAndPhotos = await loadPosts();
     this.setState({ posts: postsAndPhotos });
   }
 
@@ -25,17 +25,7 @@ class App extends Component {
 
     return (
       <section className="container">
-        <div className="posts">
-          {posts.map(post => (
-            <PostCard
-            key={post.id}
-            title={post.title}
-            body={post.body}
-            id={post.id}
-            cover={post.cover}
-            /> 
-          ))}
-        </div>
+      <Posts  posts= {posts} />
       </section>
 
     );
