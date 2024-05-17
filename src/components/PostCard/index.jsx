@@ -1,13 +1,11 @@
-export const PostCard = (props) => {
-    console.log(props);
+export const PostCard = ({title, cover, body, id}) => {
     return (
-        <h1>Ola</h1>
-        // <div className="post" key={post.id}>
-        //     <img src={post.cover} alt={post.title} />
-        //     <div className="post-content">
-        //         <h1>{post.title}</h1>
-        //         <p>{post.body}</p>
-        //     </div>
-        // </div>
+        <div className="post" key={id}>
+            <img src={cover} alt={title} />
+            <div className="post-content">
+                <h1>{title}</h1>
+                <p>{body}</p>
+            </div>
+        </div>
     );
 }
