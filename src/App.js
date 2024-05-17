@@ -1,6 +1,9 @@
 import { Component } from 'react';
+
 import './App.css';
+
 import { PostCard } from './components/PostCard';
+import { loadPosts } from './utils/load-posts'
 
 
 class App extends Component {
@@ -13,19 +16,8 @@ class App extends Component {
   }
 
   loadPosts = async () => {
-    const postsResponse = fetch('https://jsonplaceholder.typicode.com/posts');
-    const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos');
-
-    const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
-
-    const postsJson = await posts.json();
-    const photosJson = await photos.json();
-
-    const postsAndPhotos = postsJson.map((post, index) => {
-      return { ...post, cover: photosJson[index].url }
-    });
-
-    this.setState({ posts: postsAndPhotos })
+    const postsAndPhotos = await loadPosts ();
+    this.setState({ posts: postsAndPhotos });
   }
 
   render() {
