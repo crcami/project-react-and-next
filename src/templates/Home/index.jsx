@@ -4,6 +4,7 @@ import './styles.css';
 import { Posts } from '../../components/Posts';
 
 import { loadPosts } from '../../utils/load-posts'
+import { Button } from '../../components/Button';
 
 
 
@@ -37,7 +38,7 @@ import { loadPosts } from '../../utils/load-posts'
     return (
       <section className="container">
       <Posts  posts= {posts} />
-      <button onClick={this.loadMorePosts}> Load More Posts </button>
+      <Button text="Load more posts"/>
       </section>
 
     );
