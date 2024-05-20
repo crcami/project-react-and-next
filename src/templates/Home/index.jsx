@@ -29,7 +29,16 @@ import { Button } from '../../components/Button';
      });
   }
   loadMorePosts = () => {
-    console.log('Load more posts chamado');
+   const {
+     page,
+     postsPerPage,
+     allPosts,
+     posts
+   } = this.state;
+   const nextPage = page + postsPerPage;
+   const nextPosts = allPosts.slice(nextPage,nextPage + postsPerPage);
+   posts.push(...nextPosts);
+   this.setState({posts, page: nextPage});
   }
 
   render() {
@@ -38,7 +47,10 @@ import { Button } from '../../components/Button';
     return (
       <section className="container">
       <Posts  posts= {posts} />
-      <Button text="Load more posts"/>
+      <Button 
+      text="Load more posts"
+      onClick={this.loadMorePosts}
+      />
       </section>
 
     );
