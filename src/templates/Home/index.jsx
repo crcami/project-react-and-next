@@ -13,7 +13,7 @@ import { Button } from '../../components/Button';
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 2
+    postsPerPage: 60
   };
 
   async componentDidMount() {
@@ -41,19 +41,23 @@ import { Button } from '../../components/Button';
    this.setState({posts, page: nextPage});
   }
 
-  render() {
-    const { posts } = this.state;
+   render() {
+     const { posts, page, postsPerPage, allPosts} = this.state;
+     const noMorePosts = page + postsPerPage >= allPosts.length;
 
-    return (
-      <section className="container">
-      <Posts  posts= {posts} />
-      <Button 
-      text="Load more posts"
-      onClick={this.loadMorePosts}
-      />
-      </section>
+     return (
+       <section className="container">
+         <Posts posts={posts} />
+         <div class="button-container">
+           <Button
+             text="Load more posts"
+             onClick={this.loadMorePosts}
+             disabled={noMorePosts}
+           />
+         </div>
+       </section>
 
-    );
-  }
-}
+     );
+   }
+ }
 
