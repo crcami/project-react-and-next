@@ -48,9 +48,17 @@ import { Button } from '../../components/Button';
     }
 
    render() {
-     const { posts, page, postsPerPage, allPosts, searchValue} = this.state;
+     const { posts, page, postsPerPage, allPosts, searchValue } = this.state;
      const noMorePosts = page + postsPerPage >= allPosts.length;
-     const filteredPosts = posts;
+     const filteredPosts = !!searchValue ?
+       allPosts.filter(post => {
+         return post.title.toLowerCase().includes(
+          searchValue.toLowerCase()
+         );
+       })
+      : 
+      posts;
+
      return (
        <section className="container">
          {!!searchValue && (
@@ -59,13 +67,21 @@ import { Button } from '../../components/Button';
            </>
          )}
         
-        <input 
-        onChange={this.handleChange}
-        value={searchValue}
-        type="search"/>
-        <br></br><br />
+         <input
+           onChange={this.handleChange}
+           value={searchValue}
+           type="search" 
+           />
+         <br></br><br />
 
-         <Posts posts={filteredPosts} />
+         {filteredPosts.length > 0 && (
+          <Posts posts={filteredPosts} />
+         )}
+
+         {filteredPosts.length === 0 && (
+           <p>Não existem posts =( </p>
+         )}
+         
          
          <div className="button-container">
           {!searchValue &&(
