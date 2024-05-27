@@ -13,7 +13,7 @@ import { Button } from '../../components/Button';
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 60,
+    postsPerPage: 6,
     searchValue: ''
   };
 
@@ -50,23 +50,32 @@ import { Button } from '../../components/Button';
    render() {
      const { posts, page, postsPerPage, allPosts, searchValue} = this.state;
      const noMorePosts = page + postsPerPage >= allPosts.length;
-
+     const filteredPosts = posts;
      return (
        <section className="container">
+         {!!searchValue && (
+           <>
+             <h1> Search Value: {searchValue}</h1><br></br>
+           </>
+         )}
+        
         <input 
         onChange={this.handleChange}
         value={searchValue}
         type="search"/>
         <br></br><br />
 
-         <Posts posts={posts} />
+         <Posts posts={filteredPosts} />
          
          <div className="button-container">
-           <Button
+          {!searchValue &&(
+            <Button
              text="Load more posts"
              onClick={this.loadMorePosts}
              disabled={noMorePosts}
            />
+          )}
+           
          </div>
        </section>
 
